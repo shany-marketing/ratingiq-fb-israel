@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="he" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RatingIQ — ישראל פייסבוק</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1C2A39;--slate:#516B84;--gold:#C9A86A;--charcoal:#2B2B2B;
+  --sand:#ECE8E2;--white:#fff;--bg:#f5f4f2;--fb:#1877F2;
+  --status-draft:#64748b;--status-ready:#3b82f6;--status-scheduled:#d97706;--status-published:#16a34a;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--charcoal);min-height:100vh}
+h1,h2,h3,h4{font-family:'Manrope',sans-serif}
+header{background:var(--navy);padding:0 28px;display:flex;align-items:center;height:58px;gap:20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.logo{font-family:'Manrope',sans-serif;font-weight:800;font-size:17px;color:#fff;letter-spacing:-.3px}
+.logo span{color:var(--gold)}
+.header-sub{font-size:12px;color:var(--slate);letter-spacing:.5px;text-transform:uppercase;font-weight:600;margin-left:4px}
+.fb-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(24,119,242,.18);color:#6aabff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;margin-left:6px}
+nav{display:flex;gap:4px;margin-left:auto}
+nav button{background:none;border:none;color:rgba(255,255,255,.55);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .15s}
+nav button.active{background:rgba(255,255,255,.12);color:#fff}
+nav button:hover:not(.active){color:#fff;background:rgba(255,255,255,.07)}
+main{padding:28px 32px;max-width:1400px;margin:0 auto}
+.stats{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.stat-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:10px;padding:14px 20px;min-width:110px;flex:1}
+.stat-card .num{font-family:'Manrope',sans-serif;font-size:26px;font-weight:800;color:var(--navy)}
+.stat-card .lbl{font-size:11px;font-weight:600;color:var(--slate);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.stat-card.draft .num{color:var(--status-draft)}
+.stat-card.ready .num{color:var(--status-ready)}
+.stat-card.scheduled .num{color:var(--status-scheduled)}
+.stat-card.published .num{color:var(--status-published)}
+.filters{display:flex;gap:10px;margin-bottom:18px;align-items:center;flex-wrap:wrap}
+.filters select,.filters input{font-family:'Inter',sans-serif;font-size:13px;border:1px solid rgba(0,0,0,.12);border-radius:7px;padding:7px 12px;background:#fff;color:var(--charcoal);outline:none;cursor:pointer}
+.filters select:focus,.filters input:focus{border-color:var(--slate)}
+.btn{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;padding:8px 16px;border-radius:7px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:#253547}
+.btn-ghost{background:transparent;border:1px solid rgba(0,0,0,.14);color:var(--charcoal)}
+.btn-ghost:hover{background:rgba(0,0,0,.04)}
+.btn-sm{font-size:12px;padding:5px 11px}
+.btn-copy{background:#f1f0ee;border:1px solid rgba(0,0,0,.1);color:var(--charcoal);font-size:12px;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.btn-copy:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.btn-copy.copied{background:#16a34a;color:#fff;border-color:#16a34a}
+.table-wrap{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+thead th{background:#f9f8f6;padding:11px 16px;text-align:left;font-size:11px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid rgba(0,0,0,.08);white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(0,0,0,.05);transition:background .1s;cursor:pointer}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#faf9f7}
+tbody td{padding:12px 16px;font-size:13.5px;vertical-align:middle}
+.td-date{white-space:nowrap;font-weight:600;color:var(--charcoal);font-size:13px}
+.td-day{font-size:11px;color:var(--slate);font-weight:400;display:block;margin-top:1px}
+.type-badge{display:inline-block;padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Heebo',sans-serif;white-space:nowrap}
+.type-ranking{background:#fef3c7;color:#b45309}
+.type-gem{background:#ccfbf1;color:#0f766e}
+.type-data{background:#e0e7ff;color:#4338ca}
+.type-engagement{background:#ede9fe;color:#6d28d9}
+.type-chain{background:#ffe4e6;color:#be123c}
+.type-product{background:#dcfce7;color:#15803d}
+.type-market{background:#fff7ed;color:#c2410c}
+.type-competitive{background:#fef9c3;color:#854d0e}
+.type-trend{background:#e0f2fe;color:#0369a1}
+.type-omri{background:#faf5ff;color:#7e22ce}
+.topic-tag{font-size:12px;font-weight:600;color:var(--slate);background:#f1f0ee;padding:3px 8px;border-radius:5px;display:inline-block;font-family:'Heebo',sans-serif}
+.copy-preview{font-size:13px;color:var(--charcoal);max-width:300px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Heebo',sans-serif;direction:rtl;text-align:right}
+.status-badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700}
+.status-draft{background:#f1f5f9;color:var(--status-draft)}
+.status-ready{background:#eff6ff;color:var(--status-ready)}
+.status-scheduled{background:#fffbeb;color:var(--status-scheduled)}
+.status-published{background:#f0fdf4;color:var(--status-published)}
+.status-select{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;border:none;border-radius:20px;padding:3px 8px;cursor:pointer;outline:none;-webkit-appearance:none;appearance:none}
+.omri-cell{width:60px;text-align:center}
+.omri-tick{width:28px;height:28px;border-radius:50%;border:2px solid #d0ccc6;background:transparent;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;margin:0 auto;transition:all .2s;color:transparent}
+.omri-tick:hover{border-color:#4a8f6b;background:rgba(74,143,107,.07)}
+.omri-tick.approved{background:#4a8f6b;border-color:#4a8f6b;color:#fff}
+.vis-dot{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;background:#f1f0ee;cursor:pointer;transition:all .15s}
+.vis-dot:hover{background:var(--gold);color:var(--navy)}
+.vis-thumb{width:40px;height:40px;border-radius:5px;object-fit:cover;cursor:pointer;border:1px solid rgba(0,0,0,.1);display:block}
+.notes-cell{max-width:160px}
+.notes-cell input{width:100%;font-family:'Inter',sans-serif;font-size:12px;border:1px solid transparent;border-radius:5px;padding:4px 8px;background:transparent;color:var(--charcoal);transition:all .15s}
+.notes-cell input:hover{border-color:rgba(0,0,0,.14);background:#f9f8f6}
+.notes-cell input:focus{border-color:var(--slate);background:#fff;outline:none}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:10px}
+.section-header h2{font-family:'Manrope',sans-serif;font-size:20px;font-weight:800;color:var(--navy)}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-week{margin-bottom:28px}
+.tl-week-label{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--sand)}
+.tl-row{display:flex;gap:0;align-items:stretch;margin-bottom:8px}
+.tl-date-col{width:90px;flex-shrink:0;padding:10px 12px 10px 0;display:flex;flex-direction:column;align-items:flex-end;border-right:2px solid var(--sand)}
+.tl-date-col .day{font-family:'Manrope',sans-serif;font-weight:700;font-size:22px;color:var(--navy);line-height:1}
+.tl-date-col .weekday{font-size:10px;font-weight:600;color:var(--slate);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.tl-cards{display:flex;flex-direction:column;gap:8px;padding:0 0 0 16px;flex:1}
+.tl-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .15s;display:flex;gap:14px;align-items:flex-start}
+.tl-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.1);transform:translateY(-1px)}
+.tl-card-left{display:flex;flex-direction:column;gap:6px;flex:1}
+.tl-card-title{font-family:'Heebo',sans-serif;font-size:13.5px;font-weight:700;color:var(--navy);direction:rtl;text-align:right}
+.tl-card-preview{font-family:'Heebo',sans-serif;font-size:12.5px;color:var(--slate);direction:rtl;text-align:right;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tl-card-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:24px}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:900px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-header{padding:22px 28px;border-bottom:1px solid rgba(0,0,0,.08);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.modal-header h2{font-family:'Manrope',sans-serif;font-size:17px;font-weight:700;color:var(--navy);flex:1}
+.modal-body{padding:24px 28px;overflow-y:auto;flex:1;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.modal-footer{padding:16px 28px;border-top:1px solid rgba(0,0,0,.08);display:flex;gap:10px;justify-content:flex-end;flex-shrink:0;background:#faf9f7}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:11px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.5px}
+.field textarea,.field input,.field select{font-family:'Inter',sans-serif;font-size:13.5px;border:1px solid rgba(0,0,0,.12);border-radius:8px;padding:10px 13px;color:var(--charcoal);outline:none;transition:border-color .15s;resize:vertical;line-height:1.6}
+.field textarea:focus,.field input:focus,.field select:focus{border-color:var(--slate)}
+.field textarea.copy-area{min-height:260px;font-size:13px;font-family:'Heebo',sans-serif;direction:rtl;text-align:right;line-height:1.7}
+.field textarea.small{min-height:80px}
+.field textarea.heb-field{font-family:'Heebo',sans-serif;direction:rtl;text-align:right}
+.hint-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400e;line-height:1.5;font-family:'Heebo',sans-serif;direction:rtl;text-align:right}
+.modal-img-wrap{border:2px dashed rgba(0,0,0,.13);border-radius:8px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;background:#faf9f7}
+.modal-img-wrap:hover{border-color:var(--gold);background:#fdfbf7}
+.modal-img-wrap.has-img{border-style:solid;border-color:rgba(0,0,0,.1);cursor:default;padding:0;overflow:hidden}
+.published-item{background:#f0fdf4}
+.published-item:hover{background:#dcfce7 !important}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:3px}
+#toast{position:fixed;bottom:24px;right:24px;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;color:#fff;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none}
+#toast.show{opacity:1}
+#toast.ok{background:#16a34a}
+#toast.err{background:#dc2626}
+</style>
+</head>
+<body>
+<div id="toast"></div>
+<header>
+  <div class="logo">Rating<span>IQ</span></div>
+  <div class="header-sub">ישראל</div>
+  <div class="fb-pill">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    Facebook
+  </div>
+  <nav>
+    <button class="active" onclick="switchTab('roadmap',this)">Roadmap</button>
+    <button onclick="switchTab('timeline',this)">Timeline</button>
+  </nav>
+</header>
+<main>
+  <div id="tab-roadmap" class="tab-content active">
+    <div class="section-header">
+      <h2>Israel Facebook — יוני-אוגוסט 2026</h2>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost btn-sm" onclick="if(confirm('Reset all posts to defaults?')){localStorage.removeItem('fb_il_posts');location.reload()}">↺ Reset</button>
+        <button class="btn btn-primary" onclick="openNewPost()">+ פוסט חדש</button>
+      </div>
+    </div>
+    <div class="stats" id="stats-bar"></div>
+    <div class="filters">
+      <select id="filter-type" onchange="renderTable()">
+        <option value="">All Types</option>
+        <option value="ranking">דירוג עיר</option>
+        <option value="gem">יהלום נסתר</option>
+        <option value="data">עובדה מפתיעה</option>
+        <option value="engagement">מעורבות</option>
+        <option value="chain">מי מוביל?</option>
+        <option value="product">יכולת / מוצר</option>
+        <option value="market">מצב השוק</option>
+        <option value="competitive">תחרות</option>
+        <option value="trend">טרנד</option>
+        <option value="omri">עמרי מדבר</option>
+      </select>
+      <select id="filter-month" onchange="renderTable()">
+        <option value="">All Months</option>
+        <option value="2026-06">יוני</option>
+        <option value="2026-07">יולי</option>
+        <option value="2026-08">אוגוסט</option>
+      </select>
+      <select id="filter-status" onchange="renderTable()">
+        <option value="">All Statuses</option>
+        <option value="draft">Draft</option>
+        <option value="ready">Ready</option>
+        <option value="scheduled">Scheduled</option>
+        <option value="published">Published</option>
+      </select>
+      <input type="text" id="filter-search" placeholder="חיפוש..." oninput="renderTable()" style="flex:1;max-width:240px">
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th><th>Type</th><th>Topic</th><th>Copy Preview</th>
+            <th>Visual</th><th>Status</th><th class="omri-cell">Omri ✓</th><th>Notes</th><th style="width:36px"></th>
+          </tr>
+        </thead>
+        <tbody id="posts-table"></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="tab-timeline" class="tab-content">
+    <div class="section-header"><h2>Timeline View</h2></div>
+    <div id="timeline-view" class="timeline"></div>
+  </div>
+</main>
+
+<div class="overlay" id="post-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modal-title">Edit Post</h2>
+      <button class="btn btn-ghost btn-sm" style="margin-left:auto" onclick="closeModal()">✕ Close</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="field"><label>Date</label><input type="date" id="edit-date"></div>
+        <div class="field">
+          <label>Post Type</label>
+          <select id="edit-type">
+            <option value="ranking">דירוג עיר</option>
+            <option value="gem">יהלום נסתר</option>
+            <option value="data">עובדה מפתיעה</option>
+            <option value="engagement">מעורבות</option>
+            <option value="chain">מי מוביל?</option>
+            <option value="product">יכולת / מוצר</option>
+            <option value="market">מצב השוק</option>
+            <option value="competitive">תחרות</option>
+            <option value="trend">טרנד</option>
+            <option value="omri">עמרי מדבר</option>
+          </select>
+        </div>
+        <div class="field"><label>Topic</label><input type="text" id="edit-topic" style="font-family:'Heebo',sans-serif;direction:rtl;text-align:right"></div>
+        <div class="field">
+          <label>Status</label>
+          <select id="edit-status">
+            <option value="draft">Draft</option><option value="ready">Ready</option>
+            <option value="scheduled">Scheduled</option><option value="published">Published</option>
+          </select>
+        </div>
+        <div class="field"><label>Visual Concept (Canva)</label><textarea id="edit-visual-concept" class="small heb-field"></textarea></div>
+        <div class="field">
+          <label>Canva Visual</label>
+          <div id="modal-img-zone" class="modal-img-wrap" onclick="document.getElementById('modal-file-input').click()"
+            ondragover="event.preventDefault();this.style.borderColor='var(--gold)'"
+            ondragleave="this.style.borderColor=''"
+            ondrop="event.preventDefault();this.style.borderColor='';modalHandleFile(event.dataTransfer.files[0])">
+            <div id="modal-img-placeholder" style="padding:14px 0;color:var(--slate)">
+              <div style="font-size:22px;margin-bottom:6px">📤</div>
+              <div style="font-size:12px;font-weight:600;color:var(--navy);margin-bottom:2px">Upload Canva visual</div>
+              <div style="font-size:11px">Click or drag PNG/JPG</div>
+            </div>
+            <img id="modal-img-preview" style="display:none;width:100%;border-radius:6px">
+          </div>
+          <input type="file" id="modal-file-input" style="display:none" accept="image/*" onchange="modalHandleFile(this.files[0]);this.value=''">
+          <div id="modal-img-actions" style="display:none;gap:6px;margin-top:6px;flex-direction:row">
+            <button type="button" class="btn btn-ghost btn-sm" style="flex:1" onclick="modalRemoveImage()">Remove</button>
+            <button type="button" class="btn btn-ghost btn-sm" style="flex:1" onclick="document.getElementById('modal-file-input').click()">Replace</button>
+          </div>
+        </div>
+        <div class="field"><label>Hashtags</label><textarea id="edit-hashtags" class="small heb-field"></textarea></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div id="fill-hint" class="hint-box" style="display:none"></div>
+        <div class="field" style="flex:1">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+            <label style="margin-bottom:0">Copy (Hebrew)</label>
+            <button class="btn-copy" id="copy-btn" onclick="copyCopy()">Copy Text</button>
+          </div>
+          <textarea id="edit-copy" class="copy-area"></textarea>
+        </div>
+        <div class="field"><label>Notes</label><input type="text" id="edit-notes"></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0">
+          <label style="font-size:12px;font-weight:600;color:var(--slate);text-transform:uppercase;letter-spacing:.4px">Omri Approved</label>
+          <input type="checkbox" id="edit-omri" style="width:18px;height:18px;cursor:pointer;accent-color:#4a8f6b">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveModal()">Save Post</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA_VERSION = 3;
+
+const TYPE_META = {
+  ranking:     {label:'דירוג עיר',      cls:'type-ranking',     hint:'Admin table: סנני לפי עיר, מיינו לפי Rating, העתיקי TOP 3 (שם מלון, דירוג, מספר ביקורות)'},
+  gem:         {label:'יהלום נסתר',     cls:'type-gem',         hint:'חפשי מלון עם דירוג 9.0+ ופחות מ-80 ביקורות - פריפריה עובדת הכי טוב'},
+  data:        {label:'עובדה מפתיעה',   cls:'type-data',         hint:'ממוצע לפי עיר/אזור, TOP 1 בדירוג, מספר מלונות עם 9+ וכדומה'},
+  engagement:  {label:'מעורבות',        cls:'type-engagement',  hint:'פוסט שישי = תמיד מעורבות. לבקש תגובה בטקסט ולא להשתמש בכלי הסקרים'},
+  chain:       {label:'מי מוביל?',      cls:'type-chain',        hint:'סנני לפי שם רשת, ממוצע של 4-6 נכסים, מינימום 3 רשתות להשוואה'},
+  product:     {label:'יכולת / מוצר',  cls:'type-product',     hint:'פוסטים על יכולות RatingIQ: תגובות חכמות, זיהוי הצטלבויות, ניתוח סוגי אורחים, מעקב מתחרים'},
+  market:      {label:'מצב השוק',       cls:'type-market',      hint:'עונות עומס/רגיעה, דפוסי דירוג לאורך השנה, מה קורה לדירוגים בתקופות שונות'},
+  competitive: {label:'תחרות',          cls:'type-competitive',  hint:'השוואת דירוגים בין מתחרים, מה קורה כשהמתחרה עולה/יורד, חשיבות המיקום היחסי'},
+  trend:       {label:'טרנד',           cls:'type-trend',        hint:'מי כותב ביקורות, מתי, מה מניע ביקורות, טרנדים בשוק המלונות הישראלי'},
+  omri:        {label:'עמרי מדבר',      cls:'type-omri',         hint:'פוסט אישי/מנהיגות מעמרי. סיפורים מהשטח, תובנות מנהיגות, זווית אישית על התעשייה'}
+};
+
+const STATUS_COLORS = {draft:'status-draft',ready:'status-ready',scheduled:'status-scheduled',published:'status-published'};
+const DAYS_HE = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+
+const DEFAULT_POSTS = [
+
+// ─── יוני ───
+{
+  id:'fb1', date:'2026-06-01', type:'ranking', topic:'תל אביב',
+  copy:`🏆 מלונות תל אביב - הדירוג
+
+הנה TOP 3 המלונות בתל אביב לפי דירוג:
+
+🥇 [שם מלון 1] - [ציון]/10 ([מספר] ביקורות)
+🥈 [שם מלון 2] - [ציון]/10 ([מספר] ביקורות)
+🥉 [שם מלון 3] - [ציון]/10 ([מספר] ביקורות)
+
+הנתונים מתעדכנים.
+המלון שלכם ברשימה? כדאי לדעת איפה אתם עומדים.
+
+הדירוג המלא של מלונות ישראל:
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | כותרת עיר בלבן | 3 שורות מדליה + דירוג בסופט גולד | לוגו תחתית',
+  hashtags:'#מלונות_ישראל #דירוג_מלונות #תל_אביב #מלונאות #RatingIQ #IsraelHotels',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb2', date:'2026-06-03', type:'gem', topic:'יהלום נסתר #1',
+  copy:`💎 יהלום נסתר
+
+[שם מלון] ב[שם עיר].
+דירוג: [ציון]/10
+ביקורות: רק [מספר ביקורות].
+
+מלון שמצליח לשמור על דירוג גבוה עם מעט ביקורות - זה לא מקרה.
+זו עבודה.
+
+כל ביקורת כאן שווה הרבה יותר ממלון עם אלפי ביקורות ממוצעות.
+
+הנתונים מתוך מאגר המלונות הישראלי של RatingIQ:
+rating-iq.com`,
+  visualConcept:'1080x1080 | תמונת מלון + overlay כהה | 💎 יהלום נסתר בסופט גולד | שם מלון לבן | מלבן ציון זהב | rating-iq.com תחתית',
+  hashtags:'#מלונות_ישראל #מלונאות #RatingIQ #IsraelHotels #HotelManagement',
+  status:'draft', omriApproved:false, notes:'דירוג 9.0+ ופחות מ-80 ביקורות', visual:''
+},
+{
+  id:'fb3', date:'2026-06-05', type:'engagement', topic:'מה הכי קשה לשפר',
+  copy:`💬 שאלה לאנשי התעשייה
+
+מה הקטגוריה שהכי קשה לשפר בדירוג מלון?
+
+1. שירות אנושי
+2. נקיון
+3. תחזוקה
+4. ערך למחיר - ספרו בתגובות
+
+אנחנו בוחנים נתונים ממלונות רבים בישראל.
+מה אתם רואים בשטח?
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Slate Blue שיפוע | שאלה גדולה לבנה | 4 קפסולות | rating-iq.com',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #HospitalityIsrael',
+  status:'draft', omriApproved:false, notes:'פוסט שישי = engagement', visual:''
+},
+{
+  id:'fb4', date:'2026-06-08', type:'ranking', topic:'אילת',
+  copy:`🏆 מלונות אילת - הדירוג
+
+הנה TOP 3 המלונות באילת לפי דירוג:
+
+🥇 [שם מלון 1] - [ציון]/10 ([מספר] ביקורות)
+🥈 [שם מלון 2] - [ציון]/10 ([מספר] ביקורות)
+🥉 [שם מלון 3] - [ציון]/10 ([מספר] ביקורות)
+
+הנתונים מתעדכנים.
+הדירוג גלוי לכולם. כדאי לדעת איפה אתם עומדים.
+
+הדירוג המלא של מלונות ישראל:
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | כותרת אילת בלבן | מדליות + דירוג זהב | לוגו תחתית',
+  hashtags:'#מלונות_ישראל #דירוג_מלונות #אילת #מלונאות #RatingIQ #IsraelHotels',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb5', date:'2026-06-10', type:'data', topic:'ממוצע לפי אזור',
+  copy:`📊 [עובדה קצרה בכותרת]
+
+הנה עובדה שהפתיעה אותנו:
+[עיר/אזור] מוביל/ת עם ממוצע דירוג של [ציון]/10.
+
+[X] מלונות. [Y] ביקורות מצטברות.
+
+הממוצע של הסביבה שלכם מכתיב את ציפיות האורחים.
+כדאי לדעת איפה אתם עומדים ביחס לשוק.
+
+הדירוג המלא של מלונות ישראל:
+rating-iq.com`,
+  visualConcept:'1080x1080 Warm Sand (#ECE8E2) | עובדה ענקית בDeep Navy | rating-iq.com תחתית',
+  hashtags:'#מלונות_ישראל #מלונאות_ישראל #RatingIQ #IsraelHotels #HotelManagement',
+  status:'draft', omriApproved:false, notes:'ממוצע לפי עיר/אזור מadmin table', visual:''
+},
+{
+  id:'fb6', date:'2026-06-12', type:'chain', topic:'קרב רשתות - צפון',
+  copy:`⚔️ קרב הרשתות - מי מוביל בצפון ישראל?
+
+בדקנו את כל רשתות המלונות בצפון.
+התוצאות:
+
+[שם רשת 1] - ממוצע [ציון]/10
+[שם רשת 2] - ממוצע [ציון]/10
+[שם רשת 3] - ממוצע [ציון]/10
+
+[שם הרשת המובילה] מובילה - לעכשיו.
+
+הנתונים מתעדכנים. הדירוג יכול להשתנות.
+הדירוג של הרשת שלכם גלוי. השאלה היא - מה עושים איתו?
+
+כל המלונות, כל הרשתות, כל הנתונים:
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy + קו אלכסוני זהב | 3 שורות רשת + ציון | לוגו תחתית',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HospitalityIsrael #HotelManagement',
+  status:'draft', omriApproved:false, notes:'פתאל, בראון, לאונרדו, אטלס, קיסר - מינימום 3 נכסים לרשת', visual:''
+},
+{
+  id:'fb7', date:'2026-06-15', type:'ranking', topic:'ים המלח',
+  copy:`🏆 מלונות ים המלח - הדירוג
+
+הנה TOP 3 המלונות בים המלח לפי דירוג:
+
+🥇 [שם מלון 1] - [ציון]/10 ([מספר] ביקורות)
+🥈 [שם מלון 2] - [ציון]/10 ([מספר] ביקורות)
+🥉 [שם מלון 3] - [ציון]/10 ([מספר] ביקורות)
+
+הנתונים מתעדכנים.
+המלון שלכם ברשימה? הדירוג גלוי - כדאי לדעת איפה אתם עומדים.
+
+הדירוג המלא של מלונות ישראל:
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | כותרת ים המלח בלבן | מדליות + דירוג זהב | לוגו תחתית',
+  hashtags:'#מלונות_ישראל #דירוג_מלונות #ים_המלח #מלונאות #RatingIQ #IsraelHotels',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb8', date:'2026-06-17', type:'gem', topic:'יהלום נסתר #2 - פריפריה',
+  copy:`💎 יהלום נסתר - מלון בפריפריה עם דירוג שמספר סיפור
+
+[שם מלון] ב[שם עיר].
+דירוג: [ציון]/10
+ביקורות: רק [מספר ביקורות].
+
+לא תל אביב. לא אילת.
+[שם עיר].
+
+דירוג כזה לא בא מאליו. הוא בא מניהול קשוב ועבודה עקבית.
+זה מה שמעניין אותנו.
+
+הנתונים מתוך מאגר המלונות הישראלי של RatingIQ:
+rating-iq.com`,
+  visualConcept:'1080x1080 | תמונת מלון + overlay כהה | 💎 יהלום נסתר זהב | שם מלון + עיר לבן | מלבן ציון | rating-iq.com',
+  hashtags:'#מלונות_ישראל #מלונאות #פריפריה #RatingIQ #HotelManagement #IsraelHotels',
+  status:'draft', omriApproved:false, notes:'דירוג 9.0+ ופחות מ-80 ביקורות - צפון/בקעה/נגב', visual:''
+},
+{
+  id:'fb9', date:'2026-06-19', type:'engagement', topic:'מה מניע דירוג גבוה',
+  copy:`💬 שאלה שמעניינת אותנו
+
+מה לדעתכם הגורם הכי משמעותי לדירוג גבוה במלון?
+
+1. שירות אנושי
+2. ניהול תלונות
+3. עקביות בחוויה
+4. מה אחר - ספרו בתגובות
+
+אנחנו בוחנים נתונים ממלונות רבים בישראל.
+התשובה שלכם מעניינת אותנו.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Slate Blue שיפוע | שאלה לבנה | 4 קפסולות | rating-iq.com',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #HospitalityIsrael',
+  status:'draft', omriApproved:false, notes:'פוסט שישי = engagement', visual:''
+},
+{
+  id:'fb10', date:'2026-06-22', type:'ranking', topic:'חיפה',
+  copy:`🏆 מלונות חיפה - הדירוג
+
+הנה TOP 3 המלונות בחיפה לפי דירוג:
+
+🥇 [שם מלון 1] - [ציון]/10 ([מספר] ביקורות)
+🥈 [שם מלון 2] - [ציון]/10 ([מספר] ביקורות)
+🥉 [שם מלון 3] - [ציון]/10 ([מספר] ביקורות)
+
+הנתונים מתעדכנים.
+המלון שלכם ברשימה? הדירוג המלא:
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | כותרת חיפה בלבן | מדליות + דירוג זהב | לוגו תחתית',
+  hashtags:'#מלונות_ישראל #דירוג_מלונות #חיפה #מלונאות #RatingIQ #IsraelHotels',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb11', date:'2026-06-24', type:'data', topic:'המלון עם הדירוג הגבוה ביותר',
+  copy:`📊 [ציון]/10
+
+הנה עובדה שהפתיעה אותנו:
+המלון עם הדירוג הגבוה ביותר בישראל לא נמצא בתל אביב, ולא בירושלים.
+
+[שם מלון] ב[שם עיר].
+[ציון]/10. [מספר ביקורות] ביקורות.
+
+דירוג כזה לא נפל מהשמיים. הוא בא מאלפי חוויות אורחים שנמדדו ושופרו.
+מה הדירוג של המלון שלכם?
+
+הדירוג המלא של מלונות ישראל:
+rating-iq.com`,
+  visualConcept:'1080x1080 Warm Sand (#ECE8E2) | ציון ענק בDeep Navy | שם מלון ועיר בסלייט | rating-iq.com',
+  hashtags:'#מלונות_ישראל #דירוג_מלונות #מלונאות #RatingIQ #IsraelHotels #HotelRatings',
+  status:'draft', omriApproved:false, notes:'sort גלובלי IL, TOP 1 מadmin table', visual:''
+},
+{
+  id:'fb12', date:'2026-06-26', type:'chain', topic:'קרב רשתות - דרום מול מרכז',
+  copy:`⚔️ קרב הרשתות - דרום מול מרכז
+
+מי מוביל - רשתות הדרום או גוש דן?
+
+[שם רשת 1] (דרום) - ממוצע [ציון]/10
+[שם רשת 2] (מרכז) - ממוצע [ציון]/10
+[שם רשת 3] (מרכז) - ממוצע [ציון]/10
+
+[שם הרשת המובילה] מובילה - לעכשיו.
+
+הנתונים מתעדכנים. הדירוג יכול להשתנות.
+הדירוג של הרשת שלכם גלוי לכולם - כדאי לדעת איפה אתם עומדים.
+
+כל הרשתות, כל הנתונים:
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy + קו אלכסוני זהב | דרום מול מרכז | 3 שורות רשת + ציון | לוגו',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HospitalityIsrael #HotelManagement',
+  status:'draft', omriApproved:false, notes:'פתאל, בראון, דן, לאונרדו, אטלס - filter by city', visual:''
+},
+{
+  id:'fb13', date:'2026-06-28', type:'ranking', topic:'טבריה וסביבות הכנרת',
+  copy:`🏆 מלונות הכנרת - הדירוג
+
+הנה TOP 3 המלונות באזור הכנרת לפי דירוג:
+
+🥇 [שם מלון 1] - [ציון]/10 ([מספר] ביקורות)
+🥈 [שם מלון 2] - [ציון]/10 ([מספר] ביקורות)
+🥉 [שם מלון 3] - [ציון]/10 ([מספר] ביקורות)
+
+הנתונים מתעדכנים.
+המלון שלכם ברשימה? הדירוג גלוי - כדאי לדעת איפה אתם עומדים.
+
+הדירוג המלא של מלונות ישראל:
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | כותרת הכנרת בלבן | מדליות + דירוג זהב | לוגו תחתית',
+  hashtags:'#מלונות_ישראל #דירוג_מלונות #טבריה #הכנרת #מלונאות #RatingIQ #IsraelHotels',
+  status:'draft', omriApproved:false, notes:'filter: טבריה + גינוסר + כינרות', visual:''
+},
+
+// ─── יולי ───
+{
+  id:'fb14', date:'2026-07-01', type:'product', topic:'תגובות חכמות לביקורות',
+  copy:`💬 ביקורת שלילית. מה עושים?
+
+רוב המנהלים לא עונים.
+חלק עונים בצורה שמחריפה את המצב.
+מעטים עונים בדרך שהופכת ביקורת שלילית להזדמנות.
+
+תגובה נכונה לביקורת שלילית לא רק מרגיעה את מי שכתב אותה.
+היא משפיעה על כל מי שקורא אחריו - ומחליט אם להזמין חדר.
+
+ב-RatingIQ אנחנו בונים תגובות חכמות שמשקפות מקצועיות ומשפרות את הדירוג.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | ציטוט ביקורת שלילית בשמאל (אדום עדין) | תגובה מקצועית בימין (ירוק עדין) | לוגו תחתית',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #GuestExperience',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb15', date:'2026-07-03', type:'engagement', topic:'כמה זמן מקדישים לדירוגים',
+  copy:`💬 שאלה לאנשי התעשייה
+
+כמה זמן בשבוע אתם מקדישים לניהול ביקורות ודירוגים?
+
+1. פחות משעה
+2. שעה עד שלוש
+3. יותר משלוש שעות
+4. בכלל לא - ספרו בתגובות
+
+שואלים כי הנתונים שלנו מראים פערים גדולים בתוצאות בין מנהלים שמקדישים זמן לנושא לבין אלה שלא.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Slate Blue שיפוע | שאלה גדולה לבנה | 4 קפסולות | rating-iq.com',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #HospitalityIsrael',
+  status:'draft', omriApproved:false, notes:'פוסט שישי = engagement', visual:''
+},
+{
+  id:'fb16', date:'2026-07-06', type:'ranking', topic:'ירושלים',
+  copy:`🏆 מלונות ירושלים - הדירוג
+
+הנה TOP 3 המלונות בירושלים לפי דירוג:
+
+🥇 [שם מלון 1] - [ציון]/10 ([מספר] ביקורות)
+🥈 [שם מלון 2] - [ציון]/10 ([מספר] ביקורות)
+🥉 [שם מלון 3] - [ציון]/10 ([מספר] ביקורות)
+
+הנתונים מתעדכנים.
+המלון שלכם ברשימה? כדאי לדעת איפה אתם עומדים.
+
+הדירוג המלא של מלונות ישראל:
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | כותרת ירושלים בלבן | מדליות + דירוג זהב | לוגו תחתית',
+  hashtags:'#מלונות_ישראל #דירוג_מלונות #ירושלים #מלונאות #RatingIQ #IsraelHotels',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb17', date:'2026-07-08', type:'product', topic:'ניתוח סוגי אורחים',
+  copy:`📊 לא כל אורח שווה אותו דירוג
+
+יש אורחים שמדרגים גבוה כמעט תמיד.
+ויש אורחים שמדרגים נמוך - ללא קשר לחוויה שלהם.
+
+RatingIQ מזהה איזה פרופיל אורח מעלה את הדירוג שלכם - ואיזה פוגם בו.
+
+לדעת מי האורח לפני שהוא כותב ביקורת - זה היתרון.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Warm Sand (#ECE8E2) | שני פרופילים אורח - חיובי ושלילי | לוגו תחתית',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #GuestExperience',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb18', date:'2026-07-10', type:'market', topic:'עונת הקיץ והדירוגים',
+  copy:`☀️ עונת הקיץ מגיעה. מה קורה לדירוגים?
+
+כשהמלון מלא ב-100%, הלחץ על הצוות עולה.
+לחץ גבוה - שירות יורד.
+שירות יורד - דירוג יורד.
+
+זה דפוס שאנחנו רואים כל שנה, אצל מלונות רבים בישראל.
+
+המנהלים שמזהים את זה מראש - מתכוננים אחרת.
+המנהלים שלא - רואים את הדירוג יורד באמצע הקיץ ולא מבינים למה.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | גרף קו עולה ויורד (תפוסה vs דירוג) | כותרת חזקה | לוגו תחתית',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #קיץ #RatingIQ #HotelManagement #IsraelHotels',
+  status:'draft', omriApproved:false, notes:'פוסט שישי - market conditions', visual:''
+},
+{
+  id:'fb19', date:'2026-07-13', type:'trend', topic:'מי כותב ביקורות בישראל',
+  copy:`📱 מי כותב ביקורות בישראל?
+
+הנתונים מציירים תמונה ברורה:
+רוב הביקורות נכתבות ב-24 השעות הראשונות אחרי הצ'ק-אאוט.
+כמעט תמיד מרגש - חיובי או שלילי.
+כמעט תמיד מהטלפון.
+
+מה עושים עם זה?
+מזהים את הרגע הנכון - לפני שהאורח כותב.
+כשעדיין יש אפשרות להשפיע.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Warm Sand | אינפוגרפיק נקי - 3 עובדות עם אייקונים | לוגו תחתית',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #GuestReviews',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb20', date:'2026-07-15', type:'competitive', topic:'הדירוג של המתחרה',
+  copy:`👁 מה הדירוג של המלון ממול?
+
+המתחרים שלכם גלויים.
+הדירוגים שלהם גלויים.
+הפער ביניכם גלוי.
+
+השאלה היא - מי עוקב?
+
+RatingIQ מציג לכם את תמונת התחרות המלאה בזמן אמת.
+לא רק את הדירוג שלכם - גם את מה שהשוק עושה סביבכם.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | שני בארים - "המלון שלכם" vs "המתחרה" | הפרש מודגש | לוגו',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #CompetitiveIntelligence',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb21', date:'2026-07-17', type:'engagement', topic:'ביקורת שלילית - מה עושים',
+  copy:`💬 שאלה שכל מנהל מלון מכיר
+
+אורח כתב ביקורת שלילית. לא מוצדקת לדעתכם.
+מה אתם עושים?
+
+1. לא עונים
+2. עונים ומסבירים
+3. מתנצלים גם אם אין אשמה
+4. גישה אחרת - ספרו בתגובות
+
+הדרך שבה עונים לביקורת שלילית משפיעה על הדירוג - לא רק על האורח שכתב.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Slate Blue שיפוע | שאלה גדולה לבנה | 4 קפסולות | rating-iq.com',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #GuestExperience',
+  status:'draft', omriApproved:false, notes:'פוסט שישי = engagement', visual:''
+},
+{
+  id:'fb22', date:'2026-07-20', type:'omri', topic:'עמרי - המספר הכי חשוב',
+  copy:`💭 שאלה שמנהלי מלונות שואלים אותי הרבה:
+
+"עמרי, מה המספר הכי חשוב לעקוב אחריו?"
+
+הדירוג שלכם ביחס לממוצע העיר.
+
+לא הדירוג הכולל. לא ביחס לעצמכם בשנה שעברה.
+ביחס למתחרים שלכם. היום.
+
+0.2 למטה - ופחות אורחים בוחרים בכם.
+0.2 למעלה - ויותר.
+
+הפרש קטן. השפעה גדולה.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | ציטוט גדול בסופט גולד | תוספת קטנה: "- עמרי, RatingIQ" | לוגו תחתית',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #HospitalityLeadership',
+  status:'draft', omriApproved:false, notes:'פוסט אישי מעמרי - צריך אישורו', visual:''
+},
+{
+  id:'fb23', date:'2026-07-22', type:'product', topic:'זיהוי הצטלבויות',
+  copy:`🔍 אותה ביקורת. שלוש פלטפורמות.
+
+יש מי שכותב ב-Booking, ב-TripAdvisor וב-Google.
+אותו אורח. אותה חוויה. שלוש השפעות על הדירוג שלכם.
+
+RatingIQ מזהה הצטלבויות בין פלטפורמות - אותו כותב, כמה ערוצים, כמה משקל.
+
+ככה יודעים על מה צריך לטפל באמת.
+ועל מה אפשר לנשום.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | 3 לוגואים של פלטפורמות עם חץ מחבר | "אותו אורח" מודגש | לוגו',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #ReviewManagement',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb24', date:'2026-07-24', type:'market', topic:'דירוגים בעונות שונות',
+  copy:`📊 נתון שמפתיע כל פעם מחדש
+
+עונות העומס הן בדרך כלל גם העונות שבהן הדירוג יורד.
+
+לא כי המלון עובד פחות טוב.
+אלא כי ציפיות האורחים עולות - והצוות מתמודד עם יותר אנשים עם פחות זמן לכל אחד.
+
+מי שמבין את הדינמיקה הזאת - עובד על המניעה, לא על הנזק.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Warm Sand | גרף עונתי פשוט (קיץ = עומס + ירידת דירוג) | לוגו תחתית',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #SeasonalTrends',
+  status:'draft', omriApproved:false, notes:'פוסט שישי - market', visual:''
+},
+{
+  id:'fb25', date:'2026-07-27', type:'ranking', topic:'נתניה והרצליה',
+  copy:`🏆 מלונות נתניה והרצליה - הדירוג
+
+הנה TOP 3 המלונות באזור השרון לפי דירוג:
+
+🥇 [שם מלון 1] - [ציון]/10 ([מספר] ביקורות)
+🥈 [שם מלון 2] - [ציון]/10 ([מספר] ביקורות)
+🥉 [שם מלון 3] - [ציון]/10 ([מספר] ביקורות)
+
+הנתונים מתעדכנים.
+המלון שלכם ברשימה? כדאי לדעת איפה אתם עומדים.
+
+הדירוג המלא של מלונות ישראל:
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | כותרת השרון בלבן | מדליות + דירוג זהב | לוגו תחתית',
+  hashtags:'#מלונות_ישראל #דירוג_מלונות #נתניה #הרצליה #מלונאות #RatingIQ',
+  status:'draft', omriApproved:false, notes:'filter: נתניה + הרצליה + רעננה', visual:''
+},
+{
+  id:'fb26', date:'2026-07-29', type:'competitive', topic:'מעקב מתחרים בזמן אמת',
+  copy:`👀 הדירוג של המתחרה שלכם עלה ב-0.3
+
+אתם יודעים?
+
+0.3 זה לא הרבה על הנייר.
+בפועל, זה יכול להיות ההבדל בין להיות ה-TOP בחיפוש - לבין להיות אחד מהרשימה.
+
+RatingIQ עוקב אחרי הדירוגים של המתחרים שלכם בזמן אמת.
+תמיד תדעו איפה אתם עומדים - גם ביחס לשוק.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | חץ עולה + "0.3+" בסופט גולד גדול | כיתוב: "המתחרה שלכם" | לוגו',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #CompetitiveIntelligence',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb27', date:'2026-07-31', type:'engagement', topic:'לשמור גבוה או להעלות נמוך',
+  copy:`💬 שאלה שמעניינת אותנו
+
+מה לדעתכם קשה יותר - לשמור על דירוג גבוה, או להעלות דירוג נמוך?
+
+1. לשמור על גבוה - הלחץ לא נגמר
+2. להעלות נמוך - הרגלים ישנים קשים לשינוי
+3. שניהם באותו הקושי
+4. תלוי - ספרו בתגובות
+
+אנחנו עובדים עם שני הסוגים. הנתונים מפתיעים.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Slate Blue שיפוע | שאלה גדולה לבנה | 4 קפסולות | rating-iq.com',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #HospitalityIsrael',
+  status:'draft', omriApproved:false, notes:'פוסט שישי = engagement', visual:''
+},
+
+// ─── אוגוסט ───
+{
+  id:'fb28', date:'2026-08-03', type:'ranking', topic:'באר שבע ודרום ישראל',
+  copy:`🏆 מלונות הדרום - הדירוג
+
+הנה TOP 3 המלונות בדרום ישראל לפי דירוג:
+
+🥇 [שם מלון 1] - [ציון]/10 ([מספר] ביקורות)
+🥈 [שם מלון 2] - [ציון]/10 ([מספר] ביקורות)
+🥉 [שם מלון 3] - [ציון]/10 ([מספר] ביקורות)
+
+הנתונים מתעדכנים.
+המלון שלכם ברשימה? הדירוג המלא:
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | כותרת הדרום בלבן | מדליות + דירוג זהב | לוגו תחתית',
+  hashtags:'#מלונות_ישראל #דירוג_מלונות #דרום #באר_שבע #מלונאות #RatingIQ',
+  status:'draft', omriApproved:false, notes:'filter: באר שבע + ערד + מצפה רמון', visual:''
+},
+{
+  id:'fb29', date:'2026-08-05', type:'product', topic:'מה פוגע בדירוג',
+  copy:`🔧 איך מעלים דירוג?
+
+לא בקסם. לא בביקורות מזויפות.
+בעבודה נכונה - עם הכלים הנכונים.
+
+RatingIQ מזהה מה פוגע לכם בדירוג:
+אילו קטגוריות מושכות ציונים נמוכים.
+אילו חדרים, אילו ימים, אילו פערים בשירות.
+
+ואז - מציע את הצעדים הנכונים לשיפור.
+
+זה לא ניחוש. זה נתונים.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | "לא ניחוש. נתונים." בסופט גולד | 3 נקודות זיהוי + פתרון | לוגו',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #RatingImprovement',
+  status:'draft', omriApproved:false, notes:'', visual:''
+},
+{
+  id:'fb30', date:'2026-08-07', type:'omri', topic:'עמרי - הביקורות לא עניין שלי',
+  copy:`💭 כשמנהל מלון אמר לי "הביקורות לא עניין שלי"
+
+ישבתי עם מנהל מלון בצפון. מלון יפה. שירות טוב.
+אמר לי: "עמרי, אני לא מתעסק עם ביקורות. אני מתעסק עם הניהול."
+
+שאלתי אותו: "כמה חדרים מלאים אתמול?"
+ענה: "72%."
+שאלתי: "ידעת שהמלון ממול, עם דירוג גבוה יותר ב-0.4, היה ב-89%?"
+
+הוא לא ידע.
+
+הדירוג הוא לא פידבק. הוא הכנסה.
+
+rating-iq.com`,
+  visualConcept:'1080x1080 Deep Navy | ציטוט גדול: "הדירוג הוא לא פידבק. הוא הכנסה." | "- עמרי, RatingIQ" | לוגו',
+  hashtags:'#מלונאות_ישראל #מלונות_ישראל #RatingIQ #HotelManagement #HospitalityLeadership',
+  status:'draft', omriApproved:false, notes:'פוסט שישי - omri personal', visual:''
+}
+
+];
+
+// ─── STORAGE ───
+function loadPosts() {
+  try {
+    const raw = localStorage.getItem('fb_il_posts');
+    if (!raw) return DEFAULT_POSTS.map(p=>({...p}));
+    const saved = JSON.parse(raw);
+    if (saved.version !== DATA_VERSION) return DEFAULT_POSTS.map(p=>({...p}));
+    const posts = saved.posts;
+    DEFAULT_POSTS.forEach(dp => { if(!posts.find(p=>p.id===dp.id)) posts.push({...dp}); });
+    return posts;
+  } catch { return DEFAULT_POSTS.map(p=>({...p})); }
+}
+function savePosts(posts){ localStorage.setItem('fb_il_posts',JSON.stringify({version:DATA_VERSION,posts})); }
+let POSTS = loadPosts();
+
+// ─── UTILS ───
+function fmtDate(d){
+  if(!d) return '';
+  const dt=new Date(d+'T12:00:00');
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${String(dt.getDate()).padStart(2,'0')} ${months[dt.getMonth()]}`;
+}
+function getDayName(d){ if(!d)return ''; return DAYS_HE[new Date(d+'T12:00:00').getDay()]; }
+function getWeekLabel(d){
+  const dt=new Date(d+'T12:00:00');
+  const months=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+  return `שבוע ${Math.ceil(dt.getDate()/7)} - ${months[dt.getMonth()]} ${dt.getFullYear()}`;
+}
+
+// ─── STATS ───
+function renderStats(){
+  const counts={total:POSTS.length,draft:0,ready:0,scheduled:0,published:0};
+  POSTS.forEach(p=>{ if(counts[p.status]!==undefined) counts[p.status]++; });
+  document.getElementById('stats-bar').innerHTML=`
+    <div class="stat-card"><div class="num">${counts.total}</div><div class="lbl">Total</div></div>
+    <div class="stat-card draft"><div class="num">${counts.draft}</div><div class="lbl">Draft</div></div>
+    <div class="stat-card ready"><div class="num">${counts.ready}</div><div class="lbl">Ready</div></div>
+    <div class="stat-card scheduled"><div class="num">${counts.scheduled}</div><div class="lbl">Scheduled</div></div>
+    <div class="stat-card published"><div class="num">${counts.published}</div><div class="lbl">Published</div></div>`;
+}
+
+// ─── FILTER ───
+function filteredPosts(){
+  const type=document.getElementById('filter-type').value;
+  const month=document.getElementById('filter-month').value;
+  const status=document.getElementById('filter-status').value;
+  const search=(document.getElementById('filter-search').value||'').toLowerCase();
+  return POSTS.filter(p=>{
+    if(type && p.type!==type) return false;
+    if(month && !(p.date||'').startsWith(month)) return false;
+    if(status && p.status!==status) return false;
+    if(search && !(p.copy||'').toLowerCase().includes(search) && !(p.topic||'').toLowerCase().includes(search)) return false;
+    return true;
+  }).sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+}
+
+// ─── TABLE ───
+function renderTable(){
+  renderStats();
+  const posts=filteredPosts();
+  const tb=document.getElementById('posts-table');
+  if(!posts.length){tb.innerHTML='<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--slate)">No posts found</td></tr>';return;}
+  tb.innerHTML=posts.map(p=>{
+    const tm=TYPE_META[p.type]||{label:p.type,cls:'type-ranking'};
+    const copyFirst=(p.copy||'').split('\n')[0].trim();
+    const visHtml=p.visual
+      ?`<img class="vis-thumb" src="${p.visual}" onclick="openModal('${p.id}');event.stopPropagation()">`
+      :`<div class="vis-dot" onclick="openModal('${p.id}');event.stopPropagation()">📎</div>`;
+    return`<tr class="${p.status==='published'?'published-item':''}" onclick="openModal('${p.id}')">
+      <td class="td-date">${fmtDate(p.date)}<span class="td-day">${getDayName(p.date)}</span></td>
+      <td><span class="type-badge ${tm.cls}">${tm.label}</span></td>
+      <td><span class="topic-tag">${p.topic||''}</span></td>
+      <td><div class="copy-preview">${copyFirst}</div></td>
+      <td onclick="event.stopPropagation()">${visHtml}</td>
+      <td onclick="event.stopPropagation()">
+        <select class="status-select ${STATUS_COLORS[p.status]||'status-draft'}" onchange="updateStatus('${p.id}',this.value)">
+          <option value="draft" ${p.status==='draft'?'selected':''}>Draft</option>
+          <option value="ready" ${p.status==='ready'?'selected':''}>Ready</option>
+          <option value="scheduled" ${p.status==='scheduled'?'selected':''}>Scheduled</option>
+          <option value="published" ${p.status==='published'?'selected':''}>Published</option>
+        </select>
+      </td>
+      <td class="omri-cell" onclick="event.stopPropagation()">
+        <button class="omri-tick${p.omriApproved?' approved':''}" onclick="toggleApproval('${p.id}')">✓</button>
+      </td>
+      <td class="notes-cell" onclick="event.stopPropagation()">
+        <input type="text" value="${(p.notes||'').replace(/"/g,'&quot;')}" placeholder="הערות..." onchange="updateNotes('${p.id}',this.value)" onclick="event.stopPropagation()">
+      </td>
+      <td onclick="event.stopPropagation()">
+        <button class="btn btn-ghost btn-sm" onclick="deletePost('${p.id}')">✕</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ─── TIMELINE ───
+function renderTimeline(){
+  const posts=POSTS.slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  const weeks={};
+  posts.forEach(p=>{const wk=getWeekLabel(p.date);if(!weeks[wk])weeks[wk]=[];weeks[wk].push(p);});
+  document.getElementById('timeline-view').innerHTML=Object.entries(weeks).map(([wk,wPosts])=>`
+    <div class="tl-week">
+      <div class="tl-week-label">${wk}</div>
+      ${wPosts.map(p=>{
+        const tm=TYPE_META[p.type]||{label:p.type,cls:'type-ranking'};
+        const dt=new Date((p.date||'')+'T12:00:00');
+        return`<div class="tl-row">
+          <div class="tl-date-col"><div class="day">${dt.getDate()}</div><div class="weekday">${getDayName(p.date)}</div></div>
+          <div class="tl-cards">
+            <div class="tl-card" onclick="openModal('${p.id}')">
+              <div class="tl-card-left">
+                <div class="tl-card-title">${p.topic||''}</div>
+                <div class="tl-card-preview">${(p.copy||'').replace(/\n/g,' ')}</div>
+                <div class="tl-card-meta">
+                  <span class="type-badge ${tm.cls}" style="font-size:10px">${tm.label}</span>
+                  <span class="status-badge ${STATUS_COLORS[p.status]||'status-draft'}">${p.status}</span>
+                  ${p.omriApproved?'<span style="font-size:11px;color:#4a8f6b;font-weight:700">✓ Omri</span>':''}
+                </div>
+              </div>
+              ${p.visual?`<img src="${p.visual}" style="width:52px;height:52px;object-fit:cover;border-radius:6px;flex-shrink:0">`:''}
+            </div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`).join('');
+}
+
+// ─── INLINE UPDATES ───
+function updateStatus(id,val){const p=POSTS.find(p=>p.id===id);if(p){p.status=val;savePosts(POSTS);renderTable();}}
+function toggleApproval(id){const p=POSTS.find(p=>p.id===id);if(p){p.omriApproved=!p.omriApproved;savePosts(POSTS);renderTable();}}
+function updateNotes(id,val){const p=POSTS.find(p=>p.id===id);if(p){p.notes=val;savePosts(POSTS);}}
+function deletePost(id){if(!confirm('Delete this post?'))return;POSTS=POSTS.filter(p=>p.id!==id);savePosts(POSTS);renderTable();}
+
+// ─── MODAL ───
+let editingId=null;
+
+function openModal(id){
+  const p=POSTS.find(p=>p.id===id);if(!p)return;
+  editingId=id;
+  document.getElementById('modal-title').textContent=p.topic||'Edit Post';
+  document.getElementById('edit-date').value=p.date||'';
+  document.getElementById('edit-type').value=p.type||'ranking';
+  document.getElementById('edit-topic').value=p.topic||'';
+  document.getElementById('edit-status').value=p.status||'draft';
+  document.getElementById('edit-visual-concept').value=p.visualConcept||'';
+  document.getElementById('edit-copy').value=p.copy||'';
+  document.getElementById('edit-hashtags').value=p.hashtags||'';
+  document.getElementById('edit-notes').value=p.notes||'';
+  document.getElementById('edit-omri').checked=p.omriApproved||false;
+  updateHint(p.type);
+  const imgZone=document.getElementById('modal-img-zone');
+  const imgPrev=document.getElementById('modal-img-preview');
+  const imgPlac=document.getElementById('modal-img-placeholder');
+  const imgAct=document.getElementById('modal-img-actions');
+  if(p.visual){imgPrev.src=p.visual;imgPrev.style.display='block';imgPlac.style.display='none';imgAct.style.display='flex';imgZone.classList.add('has-img');imgZone.onclick=null;}
+  else{imgPrev.style.display='none';imgPrev.src='';imgPlac.style.display='';imgAct.style.display='none';imgZone.classList.remove('has-img');imgZone.onclick=()=>document.getElementById('modal-file-input').click();}
+  document.getElementById('copy-btn').textContent='Copy Text';
+  document.getElementById('copy-btn').classList.remove('copied');
+  document.getElementById('post-modal').classList.add('open');
+}
+
+function updateHint(type){
+  const hintEl=document.getElementById('fill-hint');
+  const tm=TYPE_META[type];
+  if(tm&&tm.hint){hintEl.style.display='block';hintEl.innerHTML=`<strong>איך למלא:</strong><br>${tm.hint}`;}
+  else hintEl.style.display='none';
+}
+
+document.getElementById('edit-type').addEventListener('change',e=>updateHint(e.target.value));
+
+function openNewPost(){
+  const newId='fb_'+Date.now();
+  POSTS.push({id:newId,date:'',type:'ranking',topic:'',copy:'',visualConcept:'',hashtags:'#מלונות_ישראל #מלונאות #RatingIQ',status:'draft',omriApproved:false,notes:'',visual:''});
+  openModal(newId);
+}
+
+function saveModal(){
+  const p=POSTS.find(p=>p.id===editingId);if(!p)return;
+  p.date=document.getElementById('edit-date').value;
+  p.type=document.getElementById('edit-type').value;
+  p.topic=document.getElementById('edit-topic').value;
+  p.status=document.getElementById('edit-status').value;
+  p.visualConcept=document.getElementById('edit-visual-concept').value;
+  p.copy=document.getElementById('edit-copy').value;
+  p.hashtags=document.getElementById('edit-hashtags').value;
+  p.notes=document.getElementById('edit-notes').value;
+  p.omriApproved=document.getElementById('edit-omri').checked;
+  savePosts(POSTS);closeModal();renderTable();showToast('Saved','ok');
+}
+
+function closeModal(){document.getElementById('post-modal').classList.remove('open');editingId=null;}
+document.getElementById('post-modal').addEventListener('click',e=>{if(e.target===document.getElementById('post-modal'))closeModal();});
+
+function copyCopy(){
+  const text=document.getElementById('edit-copy').value;
+  const tags=document.getElementById('edit-hashtags').value;
+  navigator.clipboard.writeText(text+(tags?'\n\n'+tags:'')).then(()=>{
+    const btn=document.getElementById('copy-btn');btn.textContent='Copied!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy Text';btn.classList.remove('copied');},2000);
+  });
+}
+
+function modalHandleFile(file){
+  if(!file||!file.type.startsWith('image/'))return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const src=e.target.result;const p=POSTS.find(p=>p.id===editingId);if(p){p.visual=src;savePosts(POSTS);}
+    const imgZone=document.getElementById('modal-img-zone');
+    document.getElementById('modal-img-preview').src=src;document.getElementById('modal-img-preview').style.display='block';
+    document.getElementById('modal-img-placeholder').style.display='none';document.getElementById('modal-img-actions').style.display='flex';
+    imgZone.classList.add('has-img');imgZone.onclick=null;
+  };reader.readAsDataURL(file);
+}
+
+function modalRemoveImage(){
+  const p=POSTS.find(p=>p.id===editingId);if(p){p.visual='';savePosts(POSTS);}
+  const imgZone=document.getElementById('modal-img-zone');
+  document.getElementById('modal-img-preview').style.display='none';document.getElementById('modal-img-preview').src='';
+  document.getElementById('modal-img-placeholder').style.display='';document.getElementById('modal-img-actions').style.display='none';
+  imgZone.classList.remove('has-img');imgZone.onclick=()=>document.getElementById('modal-file-input').click();
+}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(name==='timeline')renderTimeline();
+}
+
+function showToast(msg,type){
+  const t=document.getElementById('toast');t.textContent=msg;t.className='show '+type;
+  setTimeout(()=>{t.className='';},2500);
+}
+
+renderTable();
+</script>
+</body>
+</html>
