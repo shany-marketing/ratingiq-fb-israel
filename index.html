@@ -1034,7 +1034,10 @@ function loadPosts() {
     return posts;
   } catch { return DEFAULT_POSTS.map(p=>({...p})); }
 }
-function savePosts(posts){ localStorage.setItem('fb_il_posts',JSON.stringify({version:DATA_VERSION,posts})); }
+function savePosts(posts){
+  try { localStorage.setItem('fb_il_posts',JSON.stringify({version:DATA_VERSION,posts})); }
+  catch(e){ showToast('שגיאה: האחסון מלא - נסי תמונה קטנה יותר','err'); }
+}
 let POSTS = loadPosts();
 
 // ─── UTILS ───
@@ -1228,11 +1231,25 @@ function modalHandleFile(file){
   if(!file||!file.type.startsWith('image/'))return;
   const reader=new FileReader();
   reader.onload=e=>{
-    const src=e.target.result;const p=POSTS.find(p=>p.id===editingId);if(p){p.visual=src;savePosts(POSTS);}
-    const imgZone=document.getElementById('modal-img-zone');
-    document.getElementById('modal-img-preview').src=src;document.getElementById('modal-img-preview').style.display='block';
-    document.getElementById('modal-img-placeholder').style.display='none';document.getElementById('modal-img-actions').style.display='flex';
-    imgZone.classList.add('has-img');imgZone.onclick=null;
+    const img=new Image();
+    img.onload=()=>{
+      const MAX=900;
+      const scale=Math.min(1,MAX/Math.max(img.width,img.height));
+      const canvas=document.createElement('canvas');
+      canvas.width=Math.round(img.width*scale);
+      canvas.height=Math.round(img.height*scale);
+      canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+      const src=canvas.toDataURL('image/jpeg',0.72);
+      const p=POSTS.find(p=>p.id===editingId);
+      if(p){p.visual=src;savePosts(POSTS);}
+      const imgZone=document.getElementById('modal-img-zone');
+      document.getElementById('modal-img-preview').src=src;
+      document.getElementById('modal-img-preview').style.display='block';
+      document.getElementById('modal-img-placeholder').style.display='none';
+      document.getElementById('modal-img-actions').style.display='flex';
+      imgZone.classList.add('has-img');imgZone.onclick=null;
+    };
+    img.src=e.target.result;
   };reader.readAsDataURL(file);
 }
 
