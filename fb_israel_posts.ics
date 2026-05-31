@@ -1,0 +1,488 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//RatingIQ//FB Israel//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:RatingIQ FB ישראל
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260601-000@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260601T060000Z
+DTEND:20260601T063000Z
+SUMMARY:🇮🇱 FB ישראל - גאווה 2026 פוסט 1
+DESCRIPTION:Pride: עונת התיירות - 200,000 מבקרים\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260603-001@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260603T060000Z
+DTEND:20260603T063000Z
+SUMMARY:🇮🇱 FB ישראל - גאווה 2026 פוסט 2
+DESCRIPTION:Pride: מה מחפש האורח בשבוע הגאווה? (engagement)\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260605-002@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260605T060000Z
+DTEND:20260605T063000Z
+SUMMARY:🇮🇱 FB ישראל - גאווה 2026 פוסט 3
+DESCRIPTION:Pride: 40% יותר ביקורות בשבועות אירוע\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260607-003@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260607T060000Z
+DTEND:20260607T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:דירוג: תל אביב TOP 3\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260608-004@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260608T060000Z
+DTEND:20260608T063000Z
+SUMMARY:🇮🇱 FB ישראל - גאווה 2026 פוסט 4
+DESCRIPTION:Pride: TOP מלונות תל אביב - שבוע הגאווה פתוח\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260610-005@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260610T060000Z
+DTEND:20260610T063000Z
+SUMMARY:🇮🇱 FB ישראל - גאווה 2026 פוסט 5
+DESCRIPTION:Pride: 8/10 כותבים ביקורת תוך 48 שעות\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260612-006@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260612T060000Z
+DTEND:20260612T063000Z
+SUMMARY:🇮🇱 FB ישראל - גאווה 2026 פוסט 6 - יום המצעד
+DESCRIPTION:Pride: יום המצעד - הביקורות נכתבות עכשיו\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260614-007@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260614T060000Z
+DTEND:20260614T063000Z
+SUMMARY:🇮🇱 FB ישראל - גאווה 2026 פוסט 7
+DESCRIPTION:Pride: שבוע הגאווה נגמר. הביקורות לא\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260615-008@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260615T060000Z
+DTEND:20260615T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:דירוג: ים המלח TOP 3\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260617-009@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260617T060000Z
+DTEND:20260617T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:יהלום נסתר: מלון בפריפריה\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260619-010@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260619T060000Z
+DTEND:20260619T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:מעורבות: מה מניע דירוג גבוה?\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260622-011@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260622T060000Z
+DTEND:20260622T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:דירוג: חיפה TOP 3\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260624-012@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260624T060000Z
+DTEND:20260624T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:עובדה: המלון עם הדירוג הגבוה ביותר בישראל\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260626-013@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260626T060000Z
+DTEND:20260626T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:קרב רשתות: דרום מול מרכז\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260628-014@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260628T060000Z
+DTEND:20260628T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:דירוג: טבריה והכנרת TOP 3\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260701-015@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260701T060000Z
+DTEND:20260701T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:מוצר: תגובות חכמות לביקורות שליליות\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260703-016@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260703T060000Z
+DTEND:20260703T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:מעורבות: כמה זמן מקדישים לניהול ביקורות?\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260706-017@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260706T060000Z
+DTEND:20260706T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:דירוג: ירושלים TOP 3\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260708-018@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260708T060000Z
+DTEND:20260708T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:מוצר: ניתוח סוגי אורחים\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260710-019@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260710T060000Z
+DTEND:20260710T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:שוק: עונת קיץ ודירוגים - מה קורה?\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260713-020@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260713T060000Z
+DTEND:20260713T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:טרנד: מי כותב ביקורות בישראל\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260715-021@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260715T060000Z
+DTEND:20260715T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:תחרות: הדירוג של המתחרה\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260717-022@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260717T060000Z
+DTEND:20260717T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:מעורבות: ביקורת שלילית - מה עושים?\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260720-023@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260720T060000Z
+DTEND:20260720T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:עמרי מדבר: המספר הכי חשוב\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260722-024@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260722T060000Z
+DTEND:20260722T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:מוצר: זיהוי הצטלבויות בין פלטפורמות\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260724-025@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260724T060000Z
+DTEND:20260724T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:שוק: דירוגים בעונות שונות\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260727-026@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260727T060000Z
+DTEND:20260727T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:דירוג: נתניה והרצליה TOP 3\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260729-027@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260729T060000Z
+DTEND:20260729T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:תחרות: מעקב מתחרים בזמן אמת\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260731-028@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260731T060000Z
+DTEND:20260731T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:מעורבות: לשמור גבוה או להעלות נמוך?\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260803-029@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260803T060000Z
+DTEND:20260803T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:דירוג: באר שבע ודרום ישראל TOP 3\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260805-030@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260805T060000Z
+DTEND:20260805T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:מוצר: מה פוגע בדירוג - איך מעלים\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260807-031@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260807T060000Z
+DTEND:20260807T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:עמרי מדבר: הביקורות לא עניין שלי\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260809-032@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260809T060000Z
+DTEND:20260809T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:יהלום נסתר #1\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260811-033@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260811T060000Z
+DTEND:20260811T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:מעורבות: מה הכי קשה לשפר?\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260813-034@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260813T060000Z
+DTEND:20260813T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:דירוג: אילת TOP 3 - שיא עונת הקיץ\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260816-035@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260816T060000Z
+DTEND:20260816T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:עובדה: ממוצע דירוג לפי אזור גיאוגרפי\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ratingiq-fb-il-20260818-036@rating-iq.com
+ORGANIZER:mailto:shany@rating-iq.com
+DTSTART:20260818T060000Z
+DTEND:20260818T063000Z
+SUMMARY:🇮🇱 FB ישראל - פוסט
+DESCRIPTION:קרב רשתות: מי מוביל בצפון?\nBoard: https://shany-marketing.github.io/ratingiq-fb-israel/
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:זמן לפרסם ב-Facebook ישראל
+END:VALARM
+END:VEVENT
+END:VCALENDAR
